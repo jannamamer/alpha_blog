@@ -1,0 +1,54 @@
+# https://hub.docker.com/_/ruby/
+FROM ruby:2.7.2 AS builder
+
+ARG APP_VERSION"0.0.1"
+ARG APP_ROOT=/app
+
+LABEL name="alpha_blog" \
+  version=${APP_VERSION}
+
+RUN echo "Installing packages" \
+      && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+      && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+      && apt-get update \
+      && apt-get install --no-install-recommends -y nodejs yarn \
+      && rm -rf /var/lib/apt/lists/*
+      # && gem install rails
+
+WORKDIR $APP_ROOT
+
+COPY . .
+
+RUN bin/rails webpacker:compile
+RUN bin/rails assets:precompile
+
+# Remove folders not needed in resulting image
+RUN rm -rf node_modules tmp/cache app/assets vendor/assets spec
+
+
+
+FROM ruby:2.7.2
+
+ARG APP_VERSION="0.0.1"
+ARG APP_ROOT=/app
+
+WORKDIR $APP_ROOT
+
+RUN echo "Installing packages" \
+      && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+      && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+      && apt-get update \
+      && apt-get install --no-install-recommends -y graphicsmagick postgresql-client \
+      && gem install rails
+
+COPY --from=builder $APP_ROOT $APP_ROOT
+
+RUN echo "Installing gem and yarn packages" \
+      && bundle install --without development:test \
+      && yarn install
+
+EXPOSE 3000
+
+# https://stackoverflow.com/questions/51584758/cannot-access-docker-ruby-on-rails-image-after-running
+# Force Puma to listen to all interfaces with specific port
+CMD ["rails", "s", "-b", "0.0.0.0", "--port", "3000"]

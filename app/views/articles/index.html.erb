@@ -1,0 +1,7 @@
+<h1 class="text-center">Articles</h1>
+<div id="articles">
+  <%= render 'article' %>
+</div>
+<div id="paginate-infinite-scroll" hidden>
+  <%= will_paginate @articles %>
+</div>

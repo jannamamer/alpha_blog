@@ -1,0 +1,24 @@
+<h1 class="text-center">Look ups</h1>
+
+<% if @look_ups == 0 %>
+  <div class="row justify-content-center">
+    <div class="col-12 mt-4">
+      <p class="h3 text-center">No look up found</p>
+    </div>
+  </div>
+<% else %>
+  <% @look_ups.each do |group, look_ups| %>
+    <div class="row justify-content-center">
+      <div class="col-12 mt-4">
+        <div class="card text-center">
+          <div class="card-body">
+            <h5 class="card-title text-success"><%= group %></h5>
+            <% look_ups.each do |look_up| %>
+              <p class="card-text"><%= look_up.name %></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

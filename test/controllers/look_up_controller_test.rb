@@ -1,0 +1,7 @@
+require 'test_helper'
+
+class LookUpControllerTest < ActionDispatch::IntegrationTest
+  # test "the truth" do
+  #   assert true
+  # end
+end
