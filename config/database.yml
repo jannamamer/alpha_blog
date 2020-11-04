@@ -7,7 +7,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  url: postgresql://jannadelacruz:@localhost/alpha-blog-dev?pool=5
+  url: <%= ENV['DATABASE_URL'] || 'postgresql://jannadelacruz:@localhost/alpha-blog-dev?pool=5' %>
 
 development:
   <<: *default

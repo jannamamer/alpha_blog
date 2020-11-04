@@ -1,25 +1,22 @@
 FROM ruby:2.7.2
 
-ARG APP_VERSION="0.0.1"
-ARG APP_ROOT=/app
+RUN echo "Installing bundler" \ 
+      && gem install bundler --version 2.1.4
 
-WORKDIR $APP_ROOT
-
-RUN echo "Installing packages" \
+RUN echo "Installing dependencies" \
       && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
       && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
       && apt-get update \
-      && apt-get install --no-install-recommends -y graphicsmagick postgresql-client nodejs yarn \
-      && gem install rails
+      && apt-get install -qq -y graphicsmagick postgresql-client build-essential nodejs yarn --fix-missing --no-install-recommends
 
-COPY . .
+# Set an environment variable to store where the app is installed to inside of the Docker image.
+ENV LANG C.UTF-8
+ENV BUNDLE_PATH /bundle
+ENV INSTALL_PATH /alpha_blog
+RUN mkdir -p $INSTALL_PATH
 
-RUN echo "Installing gem and yarn packages" \
-      && bundle install \
-      && yarn install
+# This sets the context of where commands will be ran in and is documented
+# on Docker's website extensively.
+WORKDIR $INSTALL_PATH
 
-EXPOSE 3000
-
-# https://stackoverflow.com/questions/51584758/cannot-access-docker-ruby-on-rails-image-after-running
-# Force Puma to listen to all interfaces with specific port
-CMD ["rails", "s", "-b", "0.0.0.0", "--port", "3000"]
+ADD . $INSTALL_PATH
