@@ -16,3 +16,12 @@ body {
 .breadcrumb-item + .breadcrumb-item::before {
   content: "> ";
 }
+
+#img-header {
+  background-image: asset-url('header.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 300px !important;
+  width: 100%;
+}

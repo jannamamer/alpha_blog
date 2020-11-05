@@ -1,8 +1,8 @@
 <div class="row">
   <% @articles.each do |article| %>
-    <div class="col-3 mt-4">
+    <div class="col-3 mt-4 mb-4">
       <div class="card text-center">
-        <%= image_tag "default-blog-header.png", class: "card-img-top img-thumbnail" %>
+        <%= image_tag "header.png", class: "card-img-top img-thumbnail" %>
         <div class="card-body">
           <h5 class="card-title mb-0"><%= link_to article.title, article, class: "text-dark" %></h5>
           <small class="font-italic font-weight-light">by <%= link_to article.user.username, article.user %></small>
