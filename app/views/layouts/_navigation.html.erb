@@ -6,7 +6,6 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-
       <% if user_signed_in? %>
         <li class="nav-item">
           <%= link_to "Bloggers", users_path, class: "nav-link" %>
@@ -46,7 +45,9 @@
           <%= link_to "Chat Room", chatroom_path, class: "nav-link" %>
         </li>
       <% end %>
+    </ul>
 
+    <ul class="navbar-nav float-right">
       <% if user_signed_in? %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
