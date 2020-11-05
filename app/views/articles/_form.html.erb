@@ -4,6 +4,14 @@
     <%= form_with(model: article, class: "shadow p-3 mb-3 bg-success rounded", local: true) do |f| %>
       <div class="form-group row">
         <div class="col-2">
+          <%= f.label :img_header, "Header", class: "col-form-label" %>
+        </div>
+        <div class="col-10">
+          <%= f.file_field :img_header, autofocus: true, class: "form-control shadow rounded" %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-2">
           <%= f.label :title, class: "col-form-label" %>
         </div>
         <div class="col-10">

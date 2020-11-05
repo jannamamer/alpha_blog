@@ -4,12 +4,13 @@
     <div class="card text-center shadow bg-white rounded">
       <div class="card-header font-italic">
         by <%= @article.user.username if @article.user %>
-        <%= link_to gravatar_for(@article.user), user_path(@article.user) %>
+        <%= image_tag @article.user.image.url, alt: 'Profile Picture', class: "img-thumbnail" %>
         <% if @article.categories.any? %>
           <div class="mt-2"><%= render @article.categories %></div> 
         <% end %>
       </div>
       <div class="card-body">
+        <%= image_tag @article.img_header.url, alt: 'Article Header', class: "card-img-top img-thumbnail" %>
         <p class="card-text"><%= @article.description %></p>
         <% if user_signed_in? && (@article.user == current_user || current_user.admin?) %>
           <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-outline-primary" %>

@@ -3,9 +3,12 @@ class Article < ApplicationRecord
   has_many :article_categories
   has_many :categories, through: :article_categories
 
-  validates :description, presence: true, length: { minimum: 10, maximum: 300 }
+  mount_uploader :img_header, ImageUploader
+
+  validates :description, presence: true, length: { minimum: 10, maximum: 5000 }
   validates :title, presence: true, length: { minimum: 6, maximum: 100 }
   validates :user_id, presence: true
+  validates :img_header, presence: true
 
   self.per_page = 12
 end

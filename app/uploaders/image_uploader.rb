@@ -14,15 +14,16 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "public/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url(*args)
-    # For Rails 3.1+ asset pipeline compatibility:
-    ActionController::Base.helpers.asset_path("default-profile.png")
-  
-    # "/images/fallback/default-profile.png"
+    if model.class.to_s.underscore == "user"
+      ActionController::Base.helpers.asset_path("default-profile.png")
+    else
+      ActionController::Base.helpers.asset_path("header.png")
+    end
   end
 
   # Process files as they are uploaded:
