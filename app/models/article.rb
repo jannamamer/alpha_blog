@@ -7,5 +7,5 @@ class Article < ApplicationRecord
   validates :title, presence: true, length: { minimum: 6, maximum: 100 }
   validates :user_id, presence: true
 
-  self.per_page = 5
+  self.per_page = 12
 end
