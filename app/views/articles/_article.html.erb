@@ -1,7 +1,7 @@
 <%= render 'layouts/main' %>
 <div class="row">
   <% @articles.each do |article| %>
-    <div class="col-3 mt-4 mb-4">
+    <div class="col-12 col-xl-3 col-lg-4 col-md-6 col-sm-12 mt-4 mb-4">
       <div class="card text-center">
         <%= image_tag article.img_header.url, alt: 'Article Header', class: "card-img-top img-thumbnail" %>
         <div class="card-body">
