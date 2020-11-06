@@ -1,7 +1,7 @@
 <%= render 'layouts/errors', obj: @article %>
 <div class="row justify-content-center">
   <div class="col-12 mt-4">
-    <%= form_with(model: article, class: "shadow p-3 mb-3 bg-success rounded", local: true) do |f| %>
+    <%= form_with(model: article, local: true) do |f| %>
       <div class="form-group row">
         <div class="col-2">
           <%= f.label :img_header, "Header", class: "col-form-label" %>
@@ -23,7 +23,7 @@
           <%= f.label :description, class: "col-form-label" %>
         </div>
         <div class="col-10">
-          <%= f.text_area :description, rows: 10, class: "form-control shadow rounded", placeholder: "Description of article" %>
+          <%= f.cktext_area :description, class: 'someclass', ckeditor: { language: 'uk'} %>
         </div>
       </div>
       <div class="form-group row">
@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="form-group row justify-content-center">
-      <%= f.submit class: "btn btn-outline-light btn-lg" %>
+      <%= f.submit class: "btn btn-outline-dark btn-lg" %>
       </div>
     <% end %>
   </div>
