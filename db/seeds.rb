@@ -16,7 +16,5 @@ unless User.find_by(email: "janna@example.com")
               username: "janna",
               first_name: "Janna",
               last_name: "Dela Cruz",
-              password: "password",
-              gender: LookUp.find_by(group: "gender", name: "Female").id
-             )
+              password: "password")
 end

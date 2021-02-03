@@ -4,7 +4,6 @@
     <div class="card text-center shadow bg-white rounded">
       <div class="card-header font-italic">
         by <%= @article.user.username if @article.user %>
-        <%= image_tag @article.user.image.url, alt: 'Profile Picture', class: "img-thumbnail" %>
         <% if @article.categories.any? %>
           <div class="mt-2"><%= render @article.categories %></div> 
         <% end %>

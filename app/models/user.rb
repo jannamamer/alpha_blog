@@ -9,12 +9,8 @@ class User < ApplicationRecord
   has_many :articles, dependent: :destroy
   has_many :messages
 
-  mount_uploader :image, ImageUploader
-  validate :image_size
-
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :gender, presence: true
   validates :username, presence: true,
                       uniqueness: { case_sensitive: false },
                       length: { minimum: 3, maximum: 25 }
@@ -25,11 +21,4 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX }
 
   self.per_page = 3
-
-  private
-    def image_size
-      if image.size > 5.megabytes
-        errors.add(:image, "should be less than 5MB")
-      end
-    end
 end
