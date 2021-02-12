@@ -1,0 +1,66 @@
+<%= form_with(model: resource, as: resource_name, url: registration_path(resource_name), local: true) do |f| %>
+  <%= bootstrap_devise_error_messages! %>
+
+  <div class="form-group row">
+    <div class="col">
+      <%= f.text_field :first_name, class: "form-control shadow rounded", placeholder: "First name" %>
+    </div>
+    <div class="w-100 d-md-none d-block pb-3"></div>
+    <div class="col">
+      <%= f.text_field :last_name, class: "form-control shadow rounded", placeholder: "Last name" %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col">
+      <%= f.text_field :username, class: "form-control shadow rounded", placeholder: "Username" %>
+    </div>
+    <div class="w-100 d-md-none d-block pb-3"></div>
+    <div class="col">
+      <%= f.email_field :email, class: "form-control shadow rounded", placeholder: "Email" %>
+    </div>
+  </div>
+
+  <% unless action_name == 'new' %>
+    <div class="form-group row">
+      <div class="col">
+        <%= f.password_field :current_password, class: "form-control shadow rounded", placeholder: "Current password" %>
+        <small class="form-text"><%= t('.we_need_your_current_password_to_confirm_your_changes') %></small>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group row">
+    <div class="col">
+      <%= f.password_field :password, class: "form-control shadow rounded", placeholder: "Password" %>
+
+      <% if @minimum_password_length %>
+        <small class="form-text"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
+      <% end %>
+    </div>
+    <div class="w-100 d-md-none d-block pb-3"></div>
+    <div class="col">
+      <%= f.password_field :password_confirmation, class: "form-control shadow rounded", placeholder: "Password confirmation" %>
+    </div>
+  </div>
+
+  <div class="form-group row justify-content-center">
+    <% if action_name == 'new' %>
+    <div class="col">
+      <%= render 'devise/shared/links' %>
+    </div>
+
+    <div class="col">
+      <%= f.submit 'Sign Up', class: 'btn btn-outline-dark btn-lg float-right' %>
+    </div>
+  <% else %>
+    <div class="col">
+      <%= link_to 'Cancel my account', registration_path(resource_name), data: { confirm: t('.are_you_sure') }, method: :delete, class: 'text-dark' %>
+      <%= link_to 'Back', :back, class: 'text-dark' %>
+    </div>
+    <div class="col">
+      <%= f.submit 'Update', class: 'btn btn-outline-dark btn-lg float-right' %>
+    </div>
+  <% end %>
+  </div>
+<% end %>
