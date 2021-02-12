@@ -45,6 +45,8 @@ gem 'carrierwave'
 # Image transformation
 gem 'mini_magick'
 
+gem 'iex-ruby-client'
+
 # Cloud services
 # gem 'fog'
 
