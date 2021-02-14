@@ -6,14 +6,20 @@ class StocksController < ApplicationController
       @stock = Stock.new_lookup(params[:stock])
       
       if @stock
-        render 'stocks/index'
+        respond_to do |format|
+          format.js { render partial: 'stocks/stock' }
+        end
       else
-        flash[:alert] = 'Please enter a valid symbol to search'
-        redirect_to stocks_path
+        respond_to do |format|
+          flash.now[:alert] = 'Please enter a valid symbol to search'
+          format.js { render partial: 'stocks/stock' }
+        end
       end
     else
-      flash[:alert] = 'Please enter a symbol to search'
-      redirect_to stocks_path
+      respond_to do |format|
+        flash.now[:alert] = 'Please enter a symbol to search'
+        format.js { render partial: 'stocks/stock' }
+      end
     end
   end
 end
