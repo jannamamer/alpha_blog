@@ -3,14 +3,12 @@ AllCops:
   Exclude:
     - bin/bundle
     - 'node_modules/**/**'
+    - db/schema.rb
 Style/Documentation:
   Enabled: false
 Metrics/ClassLength:
   Exclude:
     - 'test/**/**'
-Metrics/BlockLength:
-  Exclude:
-    - db/schema.rb
 Metrics/MethodLength:
   Exclude:
     - 'db/**/**'

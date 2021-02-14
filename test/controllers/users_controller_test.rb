@@ -13,16 +13,25 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get new' do
-    get new_user_registration_path 
+    get new_user_registration_path
     assert_response :success
   end
 
   test 'should create user' do
     assert_difference('User.count') do
-      post users_url, params: { user: { email: 'bob@example.com', username: 'bob', password: 'password', first_name: 'bob', last_name: 'example' } }
+      post users_url,
+           params: {
+             user: {
+               email: 'bob@example.com',
+               username: 'bob',
+               password: 'password',
+               first_name: 'bob',
+               last_name: 'example'
+             }
+           }
     end
 
-    assert_redirected_to root_url 
+    assert_redirected_to root_url
   end
 
   test 'should show user' do
@@ -48,7 +57,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test 'should not be able to access sign up when user is logged in' do
     sign_in_as(@user)
 
-    get new_user_registration_path 
+    get new_user_registration_path
     assert_redirected_to root_url
   end
 

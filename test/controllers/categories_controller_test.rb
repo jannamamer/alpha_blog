@@ -38,7 +38,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
       post categories_url, params: { category: { name: 'Travel' } }
     end
 
-    assert_redirected_to new_user_session_path 
+    assert_redirected_to new_user_session_path
   end
 
   test 'should not create category if not admin' do
