@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:home]
 
@@ -5,6 +7,5 @@ class PagesController < ApplicationController
     redirect_to articles_path
   end
 
-  def about
-  end
+  def about; end
 end

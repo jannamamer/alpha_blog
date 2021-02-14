@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
@@ -5,44 +7,44 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user = users(:regular)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get users_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get signup_url
     assert_response :success
   end
 
-  test "should create user" do
+  test 'should create user' do
     assert_difference('User.count') do
-      post users_url, params: { user: { email: "bob@example.com", username: "bob", password: "password" } }
+      post users_url, params: { user: { email: 'bob@example.com', username: 'bob', password: 'password' } }
     end
 
     assert_redirected_to user_url(User.last)
   end
 
-  test "should show user" do
+  test 'should show user' do
     get user_url(@user)
     assert_response :success
   end
 
-  test "should get edit when same user is logged in" do
+  test 'should get edit when same user is logged in' do
     sign_in_as(@user)
 
     get edit_user_url(@user)
     assert_response :success
   end
 
-  test "should update user when same user is logged in" do
+  test 'should update user when same user is logged in' do
     sign_in_as(@user)
 
     patch user_url(@user), params: { user: { email: @user.email, username: @user.username } }
     assert_redirected_to user_url(@user)
   end
 
-  test "should destroy user when same user is logged in" do
+  test 'should destroy user when same user is logged in' do
     sign_in_as(@user)
 
     assert_difference('User.count', -1) do
@@ -79,22 +81,22 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to user_url(admin_user)
   end
 
-  test "should redirect to login page when attempting to edit a user" do
+  test 'should redirect to login page when attempting to edit a user' do
     get edit_user_url(@user)
     assert_redirected_to login_path
   end
 
-  test "should redirect to login page when attempting to update a user" do
+  test 'should redirect to login page when attempting to update a user' do
     patch user_url(@user), params: { user: { email: @user.email, username: @user.username } }
     assert_redirected_to login_path
   end
 
-  test "should redirect to login page when attempting to destroy a user" do
+  test 'should redirect to login page when attempting to destroy a user' do
     delete user_url(@user)
     assert_redirected_to login_path
   end
 
-  test "should be able to edit other user when admin user is logged in" do
+  test 'should be able to edit other user when admin user is logged in' do
     admin_user = users(:admin)
     sign_in_as(admin_user)
 
@@ -102,7 +104,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should be able to update other user when admin user is logged in" do
+  test 'should be able to update other user when admin user is logged in' do
     admin_user = users(:admin)
     sign_in_as(admin_user)
 
@@ -110,7 +112,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to user_url(@user)
   end
 
-  test "should be able to destroy other user when admin user is logged in" do
+  test 'should be able to destroy other user when admin user is logged in' do
     admin_user = users(:admin)
     sign_in_as(admin_user)
 
@@ -121,18 +123,18 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to users_url
   end
 
-  test "should not be able to access sign up when user is logged in" do
+  test 'should not be able to access sign up when user is logged in' do
     sign_in_as(@user)
 
     get signup_url
-    assert_redirected_to root_url 
+    assert_redirected_to root_url
   end
-  test "should not be able to create new user when user is logged in" do
+  test 'should not be able to create new user when user is logged in' do
     sign_in_as(@user)
 
     assert_difference('User.count', 0) do
-      post users_url, params: { user: { email: "bob@example.com", username: "bob", password: "password" } }
+      post users_url, params: { user: { email: 'bob@example.com', username: 'bob', password: 'password' } }
     end
-    assert_redirected_to root_url 
+    assert_redirected_to root_url
   end
 end

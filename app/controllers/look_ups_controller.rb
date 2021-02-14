@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LookUpsController < ApplicationController
   before_action :set_look_ups, only: [:index]
 
@@ -9,7 +11,7 @@ class LookUpsController < ApplicationController
     @look_up = LookUp.new(look_up_params)
 
     if @look_up.save
-      flash[:notice] = "Category was successfully created"
+      flash[:notice] = 'Category was successfully created'
       set_look_ups
 
       redirect_to look_ups_url
@@ -18,15 +20,15 @@ class LookUpsController < ApplicationController
     end
   end
 
-  def index
-  end
+  def index; end
 
   private
-    def look_up_params
-      params.require(:look_up).permit(:group, :name)
-    end
 
-    def set_look_ups
-      @look_ups = LookUp.all.group_by { |look_up| look_up.group }
-    end
+  def look_up_params
+    params.require(:look_up).permit(:group, :name)
+  end
+
+  def set_look_ups
+    @look_ups = LookUp.all.group_by(&:group)
+  end
 end
