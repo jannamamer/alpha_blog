@@ -48,9 +48,6 @@ gem 'mini_magick'
 # Cloud services
 # gem 'fog'
 
-# Use postgres as the database for Active Record
-gem 'pg'
-
 gem 'font-awesome-rails'
 
 group :development, :test do
@@ -84,6 +81,9 @@ end
 group :production do
   # Use Redis adapter to run Action Cable in production
   # gem 'redis', '~> 4.0'
+
+  # Use postgres as the database for Active Record
+  gem 'pg'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
