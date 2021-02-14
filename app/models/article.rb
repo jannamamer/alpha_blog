@@ -10,7 +10,6 @@ class Article < ApplicationRecord
   validates :description, presence: true, length: { minimum: 10, maximum: 5000 }
   validates :title, presence: true, length: { minimum: 6, maximum: 100 }
   validates :user_id, presence: true
-  validates :img_header, presence: true
 
   self.per_page = 12
 end

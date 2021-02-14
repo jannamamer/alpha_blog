@@ -6,9 +6,12 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @category = Category.create(name: 'Sports')
     @admin_user = users(:admin)
+    @user = users(:regular)
   end
 
   test 'should get index' do
+    sign_in_as(@admin_user)
+
     get categories_url
     assert_response :success
   end
@@ -35,12 +38,11 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
       post categories_url, params: { category: { name: 'Travel' } }
     end
 
-    assert_redirected_to categories_url
+    assert_redirected_to new_user_session_path 
   end
 
   test 'should not create category if not admin' do
-    user = users(:regular)
-    sign_in_as(user)
+    sign_in_as(@user)
 
     assert_no_difference('Category.count') do
       post categories_url, params: { category: { name: 'Travel' } }
@@ -50,25 +52,9 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show category' do
+    sign_in_as(@user)
+
     get category_url(@category)
     assert_response :success
   end
-
-  # test "should get edit" do
-  # get edit_category_url(@category)
-  # assert_response :success
-  # end
-
-  # test "should update category" do
-  # patch category_url(@category), params: { category: {  } }
-  # assert_redirected_to category_url(@category)
-  # end
-
-  # test "should destroy category" do
-  # assert_difference('Category.count', -1) do
-  # delete category_url(@category)
-  # end
-
-  # assert_redirected_to categories_url
-  # end
 end

@@ -42,8 +42,8 @@ class ArticleTest < ActiveSupport::TestCase
     assert @article.errors.key?(:description)
   end
 
-  test "article's description should not be longer than 300 characters" do
-    @article.description = "t#{'o' * 300} long"
+  test "article's description should not be longer than 5000 characters" do
+    @article.description = "t#{'o' * 5000} long"
 
     assert_not @article.valid?
     assert @article.errors.key?(:description)
