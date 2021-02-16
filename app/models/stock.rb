@@ -1,4 +1,9 @@
 class Stock < ApplicationRecord
+  has_many :user_stocks
+  has_many :users, through: :user_stocks
+
+  validates :name, :ticker, presence: true
+
   def self.new_lookup(ticker_symbol)
     iex_client_credentials = Rails.application.credentials.iex_client
 

@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   has_many :articles, dependent: :destroy
   has_many :messages
+  has_many :user_stocks
+  has_many :stocks, through: :user_stocks
 
   validates :first_name, presence: true
   validates :last_name, presence: true

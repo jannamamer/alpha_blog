@@ -1,9 +1,6 @@
-<%= render 'layouts/messages' %>
-
-<% if @stock %>
-  <div class="card card-header d-inline pt-3">
-    <strong>Symbol: </strong> <%= @stock.ticker %>
-    <strong>Name: </strong> <%= @stock.name %>
-    <strong>Price: </strong> <%= @stock.last_price %>
-  </div>
-<% end %>
+<tr>
+  <th scope="row"><%= stock.ticker %></th>
+  <td><%= stock.name %></td>
+  <td><%= stock.last_price %></td>
+  <td>Action placeholder</td>
+</tr>
