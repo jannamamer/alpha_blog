@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :user_stocks
   devise_for :users
 
   root 'pages#home'
@@ -17,6 +16,7 @@ Rails.application.routes.draw do
   resources :look_ups, except: [:destroy]
   resources :users, only: %i[index show]
   resources :stocks, only: [:index]
+  resources :user_stocks, only: [:create]
 
   mount ActionCable.server, at: '/cable'
 end
