@@ -28,6 +28,10 @@ class User < ApplicationRecord
 
   self.per_page = 3
 
+  def full_name
+    [first_name, ' ', last_name].join
+  end
+
   def stock_already_tracked?(ticker_symbol)
     stock = Stock.check_db(ticker_symbol)
     return false unless stock
