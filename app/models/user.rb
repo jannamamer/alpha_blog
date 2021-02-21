@@ -45,4 +45,14 @@ class User < ApplicationRecord
   def can_track_stock?(ticker_symbol)
     under_stock_limit? && !stock_already_tracked?(ticker_symbol)
   end
+
+  def user_already_friend?(email)
+    stock = User.check_db(email)
+    return false unless stock
+    stocks.where(id: stock.id).exists?
+  end
+
+  def self.search(param)
+    User.where('CONCAT(first_name, last_name, email) LIKE ?', "%#{param.strip!}%")
+  end
 end

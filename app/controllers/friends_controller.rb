@@ -3,6 +3,28 @@ class FriendsController < ApplicationController
     @friends = current_user.friends 
   end
 
+  def search
+    if params[:friend].present?
+      @friends = User.search(params[:friend])
+
+      if @friends
+        respond_to do |format|
+          format.js { render partial: 'friends/result' }
+        end
+      else
+        respond_to do |format|
+          flash.now[:alert] = 'Please enter a valid friend to search'
+          format.js { render partial: 'friends/result' }
+        end
+      end
+    else
+      respond_to do |format|
+        flash.now[:alert] = 'Please enter a friend to search'
+        format.js { render partial: 'friends/result' }
+      end
+    end
+  end
+
   def destroy
     friend = User.find(params[:id])
     friendship = current_user.friendships.find_by(friend: friend)
