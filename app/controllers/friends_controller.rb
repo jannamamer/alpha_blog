@@ -5,7 +5,7 @@ class FriendsController < ApplicationController
 
   def search
     if params[:friend].present?
-      @friends = User.search(params[:friend])
+      @friends = User.search(params[:friend], current_user)
 
       if @friends
         respond_to do |format|

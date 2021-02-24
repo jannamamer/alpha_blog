@@ -52,7 +52,9 @@ class User < ApplicationRecord
     stocks.where(id: stock.id).exists?
   end
 
-  def self.search(param)
-    User.where('CONCAT(first_name, last_name, email) LIKE ?', "%#{param.strip!}%")
+  def self.search(param, current_user)
+    User.where('CONCAT(first_name, last_name, email) LIKE ?', "%#{param.strip}%")
+      .where.not(id: current_user.id)
+      .where.not(id: current_user.friends.map(&:id))
   end
 end
