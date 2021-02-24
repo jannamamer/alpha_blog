@@ -25,6 +25,17 @@ class FriendsController < ApplicationController
     end
   end
 
+  def create
+    friend = User.find(params[:friend])
+    if friend.present?
+      friendship = Friendship.new(user: current_user, friend: friend)
+      friendship.save
+    end
+
+    flash[:notice] = "#{friend.full_name} was successfully added as friend."
+    redirect_to friends_path
+  end
+
   def destroy
     friend = User.find(params[:id])
     friendship = current_user.friendships.find_by(friend: friend)

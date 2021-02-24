@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[index show]
   resources :stocks, only: [:index]
   resources :user_stocks, only: [:create, :destroy]
-  resources :friends, only: [:index, :destroy]
+  resources :friends, only: [:index, :create, :destroy]
 
   mount ActionCable.server, at: '/cable'
 end

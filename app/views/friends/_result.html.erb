@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col"><strong>First Name: </strong> <%= friend.first_name %></div>
         <div class="col"><strong>Last Name: </strong> <%= friend.last_name %></div>
-        <div class="col"><%= link_to 'Add friend', '#', class: 'btn btn-dark float-right', method: :post %></div>
+        <div class="col"><%= link_to 'Add friend', friends_path(friend: friend), class: 'btn btn-dark float-right', method: :post %></div>
       </div>
     </div>
     <div class="w-100"></div>
