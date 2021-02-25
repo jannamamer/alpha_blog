@@ -46,10 +46,12 @@ class User < ApplicationRecord
     under_stock_limit? && !stock_already_tracked?(ticker_symbol)
   end
 
-  def user_already_friend?(email)
-    stock = User.check_db(email)
-    return false unless stock
-    stocks.where(id: stock.id).exists?
+  def friends_with?(friend, current_user)
+    User.find(current_user.id).friends.where(id: friend.id).exists?
+  end
+
+  def not_friends_with?(friend, current_user)
+    !friends_with?(friend, current_user)
   end
 
   def self.search(param, current_user)
