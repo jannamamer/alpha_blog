@@ -1,0 +1,43 @@
+<%= render 'layouts/errors', obj: @article %>
+<div class="row justify-content-center">
+  <div class="col-12 mt-4">
+    <%= form_with(model: article, local: true) do |f| %>
+      <div class="form-group row">
+        <div class="col-2">
+          <%= f.label :img_header, "Header", class: "col-form-label" %>
+        </div>
+        <div class="col-10">
+          <%= f.file_field :img_header, autofocus: true, class: "form-control shadow rounded" %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-2">
+          <%= f.label :title, class: "col-form-label" %>
+        </div>
+        <div class="col-10">
+          <%= f.text_field :title, class: "form-control shadow rounded", placeholder: "Title of article" %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-2">
+          <%= f.label :description, class: "col-form-label" %>
+        </div>
+        <div class="col-10">
+          <%= f.cktext_area :description, class: 'someclass', ckeditor: { language: 'uk'} %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-2">
+          <%= f.label :category, class: "col-2 col-form-label" %>
+        </div>
+        <div class="col-10"> 
+          <%= f.collection_select(:category_ids, Category.all, :id, :name,
+          { prompt: "Make your selection from the list below (can be empty)"}, { multiple: true, size: 3, class: "custom-select shadow rounded" }) %>
+        </div>
+      </div>
+      <div class="form-group row justify-content-center">
+      <%= f.submit class: "btn btn-outline-dark btn-lg" %>
+      </div>
+    <% end %>
+  </div>
+</div>

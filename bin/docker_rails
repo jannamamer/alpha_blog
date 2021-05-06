@@ -1,0 +1,21 @@
+#! /bin/bash
+bundle check || bundle install --jobs=10
+
+yarn install --check-files
+
+for ENV_NAME in development test; do
+  FILE=/alpha_blog/tmp/database_initialised_$ENV_NAME.txt
+  if [ ! -f "$FILE" ]; then
+    echo "Creating and loading $ENV_NAME databases"
+    RAILS_ENV=$ENV_NAME bundle exec rails db:setup db:seed:development db:seed:procedures
+    touch "$FILE"
+  fi
+done
+
+echo "Migrating and refreshing reference data"
+bundle exec rails db:migrate
+RAILS_ENV=test bundle exec rails db:migrate
+
+rm -f tmp/pids/server.pid
+
+bundle exec rails s Puma -p 3000 -b '0.0.0.0'

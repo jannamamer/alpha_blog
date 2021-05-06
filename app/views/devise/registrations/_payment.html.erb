@@ -1,0 +1,26 @@
+<h6>Payment</h6>
+<%= f.fields_for :payment, Payment.new do |p| %>
+  <div class="form-group row">
+    <div class="col">
+      <%= p.text_field :card_number, class: "form-control shadow rounded", required: true, data: { stripe: 'number'} %>
+    </div>
+
+    <div class="col-2">
+      <%= p.text_field :card_cvc, class: "form-control shadow rounded", required: true, data: { stripe: 'cvc'} %>
+    </div>
+
+    <div class="col-2">
+      <%= p.select :card_expires_month, options_for_select(Payment.month_options),
+      { include_blank: 'Month' },
+      "data-stripe" => "exp-month",
+      class: "form-control shadow rounded", required: true %>
+    </div>
+
+    <div class="col-2">
+      <%= p.select :card_expires_year, options_for_select(Payment.year_options.push),
+      { include_blank: 'Year' },
+      class: "form-control shadow rounded",
+      data: { stripe: "exp-year" }, required: true %>
+    </div>
+  </div>
+<% end %>

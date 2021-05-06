@@ -1,0 +1,35 @@
+<h1 class="text-center">Alpha Bloggers</h1>
+
+<% if @users.count == 0 %>
+  <div class="row justify-content-center">
+    <div class="col-12 mt-4">
+      <p class="h3 text-center">No user found</p>
+    </div>
+  </div>
+<% else %>
+  <% @users.each do |user| %>
+    <div class="row justify-content-center">
+      <div class="col-12 mt-4">
+        <div class="card text-center">
+          <div class="card-header font-italic">by <%= link_to user.username, user %></div>
+          <div class="card-body">
+            <p class="card-text"><%= pluralize(user.articles.count, "article") %></p>
+            <%= link_to 'View profile', user, class: "btn btn-outline-success" %>
+            <% if user_signed_in? %>
+              <% if user == current_user %>
+                <%= link_to 'Edit profile', edit_user_registration_path(user), class: "btn btn-outline-success" %>
+              <% end %>
+              <% if current_user.admin? %>
+                <%= link_to 'Delete user', registration_path(user), class: "btn btn-outline-danger", method: :delete, data: { confirm: "Are you sure you want to delete the user account and all associated articles?" } %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="card-footer text-muted">
+            <small>Joined <%= time_ago_in_words(user.created_at) %> ago</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= will_paginate @users, list_classes: %w(pagination justify-content-center mt-3), previous_label: "Previous", next_label: "Next" %>
+<% end %>

@@ -1,0 +1,17 @@
+<%= render 'layouts/messages' %>
+
+<% if !@friends.empty? %>
+  <% @friends.each do |friend| %>
+    <div class="card card-header d-inline pt-3 col">
+      <div class="row">
+        <div class="col"><strong>First Name: </strong> <%= friend.first_name %></div>
+        <div class="col"><strong>Last Name: </strong> <%= friend.last_name %></div>
+        <div class="col">
+          <%= link_to 'Add friend', friends_path(friend: friend), class: 'btn btn-sm btn-dark float-right ml-1', method: :post %>
+          <%= link_to 'View Profile', user_path(friend), class: 'btn btn-sm btn-success float-right' %>
+        </div>
+      </div>
+    </div>
+    <div class="w-100"></div>
+  <% end %>
+<% end %>

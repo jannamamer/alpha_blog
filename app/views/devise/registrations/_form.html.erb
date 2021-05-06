@@ -1,0 +1,31 @@
+<%= form_with(model: resource, as: resource_name, url: registration_path(resource_name), local: true) do |f| %>
+  <%= bootstrap_devise_error_messages! %>
+
+  <%= render 'devise/registrations/profile', f: f %>
+
+  <hr>
+
+  <div class="form-group container px-0 pb-2">
+    <%= render 'devise/registrations/payment', f: f %>
+  </div>
+
+  <div class="form-group row justify-content-center">
+    <% if @user.new_record? %>
+      <div class="col">
+        <%= render 'devise/shared/links' %>
+      </div>
+
+      <div class="col">
+        <%= f.submit 'Sign Up', class: 'btn btn-outline-dark btn-lg float-right' %>
+      </div>
+    <% else %>
+      <div class="col">
+        <%= link_to 'Cancel my account', registration_path(resource_name), data: { confirm: t('.are_you_sure') }, method: :delete, class: 'text-dark' %>
+        <%= link_to 'Back', :back, class: 'text-dark' %>
+      </div>
+      <div class="col">
+        <%= f.submit 'Update', class: 'btn btn-outline-dark btn-lg float-right' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

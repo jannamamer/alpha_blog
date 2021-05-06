@@ -1,0 +1,22 @@
+<%= render 'layouts/main' %>
+<div class="row">
+  <% @articles.each do |article| %>
+    <div class="col-12 col-xl-3 col-lg-4 col-md-6 col-sm-12 mt-4 mb-4">
+      <div class="card text-center">
+        <%= image_tag article.img_header.url, alt: 'Article Header', class: "card-img-top img-thumbnail" %>
+        <div class="card-body">
+          <h5 class="card-title mb-0"><%= link_to article.title, article, class: "text-dark" %></h5>
+          <small class="font-italic font-weight-light">by <%= link_to article.user.username, article.user %></small>
+          <p class="card-text mt-3"><%= raw article.description.truncate(100) %></p>
+          <% if user_signed_in? && (article.user == current_user || current_user.admin?) %>
+            <%= link_to 'Edit', edit_article_path(article), class: "btn btn-outline-primary" %>
+            <%= link_to 'Delete', article, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
+          <% end %>
+        </div>
+        <div class="card-footer text-muted">
+          <small>Created about <%= time_ago_in_words(article.created_at) %>, edited about <%= time_ago_in_words(article.updated_at) %></small>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

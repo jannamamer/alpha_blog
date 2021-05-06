@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  database:
+    container_name: alpha-blog-database.local
+    image: postgres:12.4
+    ports:
+      - "6023:5432"
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+
+  web:
+    container_name: alpha-blog.local
+    build: .
+    image: alpha-blog
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+    environment:
+      DATABASE_URL: postgresql://postgres:@alpha-blog-database.local/alpha-blog-dev?pool=5
+      RAILS_ENV: "development" 
+      ENV_NAME: "development"
+    command: bin/docker_rails
+    volumes:
+      - .:/surgeons
+      - bundle_cache:/bundle
+
+volumes:
+  postgresql-data: {}
+  bundle_cache:
+
+networks:
+  default:
+    external:
+      name: alpha-blog

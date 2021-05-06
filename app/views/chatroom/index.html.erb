@@ -1,0 +1,29 @@
+<h1 class="text-center">Chat room</h1>
+
+<div class="row justify-content-center" style="height: 400px; overflow-y: auto;">
+  <div class="col-12 mt-4">
+    <div class="card text-center h-100">
+      <div class="card-body" id="message-container">
+          <%= render 'messages/message', messages: @messages %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-12">
+    <div class="card text-center h-100">
+      <div class="card-body">
+        <%= form_for @message, url: message_path, remote: true do |f| %>
+          <div class="form-group row">
+            <div class="col-10">
+              <%= f.text_field :body, class: "form-control", id: "message-field" %>
+            </div>
+            <div class="col-2">
+              <%= f.button "Send", class: "btn btn-secondary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

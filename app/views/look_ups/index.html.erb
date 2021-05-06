@@ -1,0 +1,39 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <%= link_to "Home", root_path %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Look Up</li>
+  </ol>
+</nav>
+
+<h1 class="text-center">Look ups</h1>
+
+<% if @look_ups == 0 %>
+  <div class="row justify-content-center">
+    <div class="col-12 mt-4">
+      <p class="h3 text-center">No look up found</p>
+    </div>
+  </div>
+<% else %>
+  <% @look_ups.each do |group, look_ups| %>
+    <div class="row justify-content-center">
+      <div class="col-12 mt-4">
+        <div class="card text-center">
+          <div class="card-body">
+            <h5 class="card-title text-success"><%= group %>
+            <a class="float-right" data-toggle="collapse" href="#<%= group %>" aria-expanded="false" aria-controls="<%= group %>">
+              <%= fa_icon "chevron-circle-down", class: "text-success" %>
+              </a>
+            </h5>
+            <div class="collapse" id="<%= group %>">
+              <% look_ups.each do |look_up| %>
+                <p class="card-text"><%= look_up.name %></p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,19 @@
+<h1 class="text-center"><%= @user.username %>'s profile</h1>
+
+<div class="text-center mt-4">
+  <% if user_signed_in? && @user == current_user %>
+    <%= link_to "Edit your profile", edit_user_registration_path(@user), class: "btn btn-sm btn-outline-success" %>
+  <% end %>
+
+  <% if current_user.not_friends_with?(@user, current_user) && @user != current_user %>
+    <%= link_to 'Add friend', friends_path(friend: @user), class: 'btn btn-sm btn-dark', method: :post %>
+  <% end %>
+</div>
+
+<h3 class="text-center mt-4">Articles</h3>
+
+<%= render 'articles/article' %>
+
+<div class="text-center mt-4">
+  <%= link_to 'Back', friends_path, class: "btn btn-sm btn-primary" %>
+</div>
