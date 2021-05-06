@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post 'message', to: 'messages#create'
 
   get 'search_friend', to: 'friends#search'
+  get 'search_stock', to: 'stocks#search'
 
   resources :articles
   resources :categories, except: [:destroy]

@@ -4,7 +4,7 @@
 
   <h3>Search Stocks</h3>
   <div class="w-100"></div>
-  <%= form_tag '#', method: :get do %>
+  <%= form_tag search_stock_path, remote: true, method: :get, class: 'form-inline' do %>
     <div class="form-group row">
       <div class="col-10">
         <%= text_field_tag :stock, params[:stock], class: 'form-control mr-sm-2', placeholder: 'Stock ticker symbol', aria_label: 'Search' %>
@@ -16,4 +16,7 @@
       </div>
     </div>
   <% end %>
+</div>
+
+<div id="search-result" class="pb-3 pl-3 row">
 </div>
