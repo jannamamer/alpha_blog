@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :look_ups, except: [:destroy]
   resources :users, only: %i[index show]
   resources :friends, only: %i[index create destroy]
+  resources :stocks, only: [:index]
 
   mount ActionCable.server, at: '/cable'
 end
