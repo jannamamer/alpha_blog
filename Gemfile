@@ -21,6 +21,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 gem 'devise-bootstrap-views', '~> 1.0'
+gem 'iex-ruby-client'
 
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap4'
