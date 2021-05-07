@@ -1,0 +1,18 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+regular:
+  id: 1
+  first_name: john
+  last_name: doe
+  username: john 
+  email: johndoe@example.com
+  encrypted_password: <%= BCrypt::Password.create('password') %>
+  confirmed_at: <%= DateTime.current %>
+
+admin:
+  first_name: jane
+  last_name: doe
+  username: jane 
+  email: janedoe@example.com
+  encrypted_password: <%= BCrypt::Password.create('password') %>
+  admin: true

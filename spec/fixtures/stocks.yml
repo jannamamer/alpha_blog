@@ -1,0 +1,5 @@
+stock_1:
+  id: 1
+  ticker: a
+  name: 	Agile
+  last_price: 123
