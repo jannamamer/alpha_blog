@@ -20,3 +20,7 @@
 
 <div id="search-result" class="pb-3 pl-3 row">
 </div>
+
+<% if !@stocks.empty? %>
+  <%= render 'stocks/table'%>
+<% end %>
