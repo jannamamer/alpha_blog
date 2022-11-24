@@ -53,4 +53,3 @@ config/application.yml
 # Temporary ignore the following files
 config/database.yml
 config/environments/production.rb
-config/initializers/devise.rb
