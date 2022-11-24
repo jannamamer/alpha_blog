@@ -1,4 +1,6 @@
 @import 'bootstrap/dist/css/bootstrap';
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
 html,
 body {
@@ -13,7 +15,7 @@ body {
   flex-shrink: none;
 }
 
-.breadcrumb-item + .breadcrumb-item::before {
+.breadcrumb-item+.breadcrumb-item::before {
   content: "> ";
 }
 
