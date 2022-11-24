@@ -271,7 +271,6 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     ssrf_filter (1.1.1)
-    stripe (8.0.0)
     thor (1.2.1)
     tilt (2.0.11)
     timeout (0.3.0)
@@ -336,7 +335,6 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets-rails
-  stripe
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 3.3.0)
