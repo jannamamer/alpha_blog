@@ -3,22 +3,32 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '3.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
+gem 'rails', '~> 7.0.3', '>= 7.0.3.1'
+
+# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem 'sprockets-rails'
+
 # Use Puma as the app server
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 5.0'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
+
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
+
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
+
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+
 gem 'devise'
 gem 'devise-bootstrap-views', '~> 1.0'
 
@@ -53,7 +63,7 @@ gem 'mini_magick'
 gem 'font-awesome-rails'
 
 # Use postgres as the database for Active Record
-gem 'pg'
+gem 'pg', '~> 1.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -83,7 +93,7 @@ end
 
 group :production do
   # Use Redis adapter to run Action Cable in production
-  # gem 'redis', '~> 4.0'
+  gem 'redis', '~> 4.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
