@@ -52,3 +52,5 @@ config/application.yml
 
 # Temporary ignore the following files
 config/database.yml
+
+*.DS_Store
